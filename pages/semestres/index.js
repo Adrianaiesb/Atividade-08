@@ -7,28 +7,28 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BsFillTrash3Fill, BsPencilFill } from "react-icons/bs";
 
 const index = () => {
-  const [disciplinas, setDisciplinas] = useState([]);
+  const [semestres, setSemestres] = useState([]);
 
   useEffect(() => {
     getAll();
   }, []);
 
   function getAll() {
-    axios.get("/api/disciplinas").then((resultado) => {
-      setDisciplinas(resultado.data);
+    axios.get("/api/semestres").then((resultado) => {
+      setSemestres(resultado.data);
     });
   }
 
   function excluir(id) {
     if (confirm("Deseja realmente excluir o registro?")) {
-      axios.delete("/api/disciplinas/" + id);
+      axios.delete("/api/semestres/" + id);
       getAll();
     }
   }
 
   return (
-    <Pagina titulo="Disciplinas">
-      <Link href="/disciplinas/form" className="mb-2 btn btn-primary">
+    <Pagina titulo="Semestres">
+      <Link href="/semestres/form" className="mb-2 btn btn-primary">
         Novo
       </Link>
 
@@ -36,15 +36,16 @@ const index = () => {
         <thead>
           <tr>
             <th>#</th>
-            <th>Nome</th>
-            <th>Curso</th>
+            <th>Semestre</th>
+            <th>Data inicio</th>
+            <th>Data fim</th>
           </tr>
         </thead>
         <tbody>
-          {disciplinas.map((item) => (
+          {semestres.map((item) => (
             <tr key={item.id}>
               <td>
-                <Link href={"/disciplinas/" + item.id}>
+                <Link href={"/semestres/" + item.id}>
                   <BsPencilFill title="Alterar" className="text-primary" />
                 </Link>{" "}
                 <BsFillTrash3Fill
@@ -53,8 +54,9 @@ const index = () => {
                   className="text-danger"
                 />
               </td>
-              <td>{item.nome}</td>
-              <td>{item.curso}</td>
+              <td>{item.semestre}</td>
+              <td>{item.datainicio}</td>
+              <td>{item.datafim}</td>
             </tr>
           ))}
         </tbody>

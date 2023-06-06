@@ -13,21 +13,26 @@ const form = () => {
   const { register, handleSubmit } = useForm();
 
   function salvar(dados) {
-    axios.post("/api/disciplinas", dados);
-    push("/disciplinas");
+    axios.post("/api/semestres", dados);
+    push("/semestres");
   }
 
   return (
-    <Pagina titulo="Disciplina">
+    <Pagina titulo="Semestre">
       <Form>
-        <Form.Group className="mb-3" controlId="nome">
-          <Form.Label>Nome: </Form.Label>
-          <Form.Control type="text" {...register("nome")} />
+        <Form.Group className="mb-3" controlId="semestre">
+          <Form.Label>Semestre: </Form.Label>
+          <Form.Control type="text" {...register("semestre")} />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="curso">
-          <Form.Label>Curso: </Form.Label>
-          <Form.Control type="text" {...register("curso")} />
+        <Form.Group className="mb-3" controlId="datainicio">
+          <Form.Label>Data inicio: </Form.Label>
+          <Form.Control type="text" {...register("datainicio")} />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="datainicio">
+          <Form.Label>Data fim: </Form.Label>
+          <Form.Control type="text" {...register("datafim")} />
         </Form.Group>
 
         <div className="text-center">
@@ -35,7 +40,7 @@ const form = () => {
             <BsCheckLg className="me-2" />
             Salvar
           </Button>
-          <Link className="ms-2 btn btn-danger" href="/disciplinas">
+          <Link className="ms-2 btn btn-danger" href="/semestres">
             <AiOutlineArrowLeft className="me-2" />
             Voltar
           </Link>

@@ -7,28 +7,28 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BsFillTrash3Fill, BsPencilFill } from "react-icons/bs";
 
 const index = () => {
-  const [disciplinas, setDisciplinas] = useState([]);
+  const [salas, setSalas] = useState([]);
 
   useEffect(() => {
     getAll();
   }, []);
 
   function getAll() {
-    axios.get("/api/disciplinas").then((resultado) => {
-      setDisciplinas(resultado.data);
+    axios.get("/api/salas").then((resultado) => {
+      setSalas(resultado.data);
     });
   }
 
   function excluir(id) {
     if (confirm("Deseja realmente excluir o registro?")) {
-      axios.delete("/api/disciplinas/" + id);
+      axios.delete("/api/salas/" + id);
       getAll();
     }
   }
 
   return (
-    <Pagina titulo="Disciplinas">
-      <Link href="/disciplinas/form" className="mb-2 btn btn-primary">
+    <Pagina titulo="Salas">
+      <Link href="/salas/form" className="mb-2 btn btn-primary">
         Novo
       </Link>
 
@@ -37,14 +37,15 @@ const index = () => {
           <tr>
             <th>#</th>
             <th>Nome</th>
-            <th>Curso</th>
+            <th>Capacidade</th>
+            <th>Tipo</th>
           </tr>
         </thead>
         <tbody>
-          {disciplinas.map((item) => (
+          {salas.map((item) => (
             <tr key={item.id}>
               <td>
-                <Link href={"/disciplinas/" + item.id}>
+                <Link href={"/salas/" + item.id}>
                   <BsPencilFill title="Alterar" className="text-primary" />
                 </Link>{" "}
                 <BsFillTrash3Fill
@@ -54,7 +55,8 @@ const index = () => {
                 />
               </td>
               <td>{item.nome}</td>
-              <td>{item.curso}</td>
+              <td>{item.capacidade}</td>
+              <td>{item.tipo}</td>
             </tr>
           ))}
         </tbody>

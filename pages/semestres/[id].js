@@ -14,32 +14,37 @@ const form = () => {
 
   useEffect(() => {
     if (query.id) {
-      axios.get("/api/disciplinas/" + query.id).then((resultado) => {
-        const disciplina = resultado.data;
+      axios.get("/api/semestres/" + query.id).then((resultado) => {
+        const semestre = resultado.data;
         
-        for (let atributo in disciplina) {
-          setValue(atributo, disciplina[atributo]);
+        for (let atributo in semestre) {
+          setValue(atributo, semestre[atributo]);
         }
       });
     }
   }, [query.id]);
 
   function salvar(dados) {
-    axios.put("/api/disciplinas/" + query.id, dados);
-    push("/disciplinas");
+    axios.put("/api/semestres/" + query.id, dados);
+    push("/semestres");
   }
 
   return (
-    <Pagina titulo="Disciplinas">
+    <Pagina titulo="Semestres">
       <Form>
         <Form.Group className="mb-3" controlId="nome">
           <Form.Label>Nome: </Form.Label>
           <Form.Control type="text" {...register("nome")} />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="curso">
-          <Form.Label>Curso: </Form.Label>
-          <Form.Control type="text" {...register("curso")} />
+        <Form.Group className="mb-3" controlId="capacidade">
+          <Form.Label>Capacidade: </Form.Label>
+          <Form.Control type="text" {...register("capacidade")} />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="tipo">
+          <Form.Label>Tipo: </Form.Label>
+          <Form.Control type="text" {...register("tipo")} />
         </Form.Group>
 
         <div className="text-center">
@@ -47,7 +52,7 @@ const form = () => {
             <BsCheckLg className="me-2" />
             Salvar
           </Button>
-          <Link className="ms-2 btn btn-danger" href="/disciplinas">
+          <Link className="ms-2 btn btn-danger" href="/semestres">
             <AiOutlineArrowLeft className="me-2" />
             Voltar
           </Link>
